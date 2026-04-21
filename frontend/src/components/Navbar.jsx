@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/clerk-react";
-import { ShoppingBagIcon, PlusIcon, UserIcon } from "lucide-react";
+import { ShoppingBagIcon, PlusIcon, UserIcon, VanIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 
 function Navbar() {
@@ -12,8 +12,8 @@ function Navbar() {
         {/* LOGO - LEFT SIDE */}
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost gap-2">
-            <ShoppingBagIcon className="size-5 text-primary" />
-            <span className="text-lg font-bold font-mono uppercase tracking-wider">Productify</span>
+            <VanIcon className="size-5 text-primary" />
+            <span className="text-lg font-bold font-mono uppercase tracking-wider">R-FACT</span>
           </Link>
         </div>
 
@@ -23,7 +23,7 @@ function Navbar() {
             <>
               <Link to="/create" className="btn btn-primary btn-sm gap-1">
                 <PlusIcon className="size-4" />
-                <span className="hidden sm:inline">New Product</span>
+                <span className="hidden sm:inline">New Vehicle</span>
               </Link>
               <Link to="/profile" className="btn btn-ghost btn-sm gap-1">
                 <UserIcon className="size-4" />

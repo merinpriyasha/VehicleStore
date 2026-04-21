@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid, date } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
 export const users = pgTable("users", {
@@ -18,7 +18,10 @@ export const products = pgTable("products", {
   id: uuid("id").defaultRandom().primaryKey(),
   title: text("title").notNull(),
   description: text("description").notNull(),
-  imageUrl: text("image_url").notNull(),
+  imageUrl: text("image_url"),
+  imagePublicId: text("image_public_id"),
+  handoverDate: date("handover_date", { mode: "date" }).notNull(),
+  releaseDate: date("release_date", { mode: "date" }),
   userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
@@ -64,7 +67,10 @@ export const commentsRelations = relations(comments, ({ one }) => ({
   // `comments.userId` is the foreign key,  `users.id` is the primary key
   user: one(users, { fields: [comments.userId], references: [users.id] }), // One comment → one user
   // `comments.productId` is the foreign key,  `products.id` is the primary key
-  product: one(products, { fields: [comments.productId], references: [products.id] }), // One comment → one product
+  product: one(products, {
+    fields: [comments.productId],
+    references: [products.id],
+  }), // One comment → one product
 }));
 
 // Type inference

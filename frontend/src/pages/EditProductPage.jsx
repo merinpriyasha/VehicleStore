@@ -34,7 +34,7 @@ function EditProductPage() {
       isError={updateProduct.isError}
       onSubmit={(formData) => {
         updateProduct.mutate(
-          { id, ...formData },
+          { id, data: formData },
           {
             onSuccess: () => navigate(`/product/${id}`),
           }

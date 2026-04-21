@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, EditIcon, Trash2Icon, CalendarIcon, UserIcon } from "lucide-react";
+import { ArrowLeftIcon, EditIcon, Trash2Icon, CalendarIcon, UserIcon, CalendarClock, CalendarCheck } from "lucide-react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import CommentsSection from "../components/CommentsSection";
 import { useAuth } from "@clerk/clerk-react";
@@ -81,13 +81,20 @@ function ProductPage() {
 
             <div className="flex flex-wrap gap-4 text-sm text-base-content/60 my-2">
               <div className="flex items-center gap-1">
-                <CalendarIcon className="size-4" />
-                {new Date(product.createdAt).toLocaleDateString()}
+                <CalendarClock className="size-4" />
+                Drop-off date: {new Date(product.handoverDate).toLocaleDateString()}
               </div>
-              <div className="flex items-center gap-1">
+
+              {product.releaseDate && (
+                <div className="flex items-center gap-1">
+                  <CalendarCheck className="size-4" />
+                  Vehicle Pickup date: {new Date(product.releaseDate).toLocaleDateString()}
+                </div>
+              )}
+              {/* <div className="flex items-center gap-1">
                 <UserIcon className="size-4" />
                 {product.user?.name}
-              </div>
+              </div> */}
             </div>
 
             <div className="divider my-2"></div>
@@ -115,11 +122,11 @@ function ProductPage() {
       </div>
 
       {/* Comments */}
-      <div className="card bg-base-300">
+      {/* <div className="card bg-base-300">
         <div className="card-body">
           <CommentsSection productId={id} comments={product.comments} currentUserId={userId} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

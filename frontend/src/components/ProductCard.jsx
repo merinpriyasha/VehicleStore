@@ -38,12 +38,12 @@ const ProductCard = ({ product }) => {
               <span className="text-xs text-base-content/60">{product.user.name}</span>
             </div>
           )}
-          {product.comments && (
+          {/* {product.comments && (
             <div className="flex items-center gap-1 text-base-content/50">
               <MessageCircleIcon className="size-3" />
               <span className="text-xs">{product.comments.length}</span>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </Link>

@@ -2,6 +2,7 @@ import express from "express";
 import { ENV } from "./config/env";
 import { clerkMiddleware } from "@clerk/express";
 import cors from "cors";
+import path from "path";
 import userRoutes from "./routes/userRoutes";
 import productRoutes from "./routes/productRoutes";
 import commentRoutes from "./routes/commentRoutes";
@@ -13,9 +14,13 @@ app.use(cors({ origin: ENV.FRONTEND_URL, credentials: true }));
 app.use(clerkMiddleware()); // auth obj will be attached to the req
 app.use(express.json()); // parses JSON request bodies.
 app.use(express.urlencoded({ extended: true })); // parses form data (like HTML forms).
+app.use((req, res, next) => {
+  console.log(req.method, req.url);
+  next();
+});
 
-app.get("/", (req, res) => {
-  const {} = req.body;
+app.get("/api/health", (req, res) => {
+  //const {} = req.body;
   res.json({
     message:
       "Welcome to Productify API - Powered by PostgreSQL, Drizzle ORM & Clerk Auth",
@@ -30,6 +35,18 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/comments", commentRoutes);
+
+if (ENV.NODE_ENV === "production") {
+  const __dirname = path.resolve();
+
+  // serve static files from frontend/dist
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  // handle SPA routing - send all non-API routes to index.html - react app
+  app.get("/{*any}", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+  });
+}
 
 app.listen(ENV.PORT, () =>
   console.log("Server is up and running on PORT:", ENV.PORT),
