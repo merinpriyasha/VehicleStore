@@ -9,7 +9,8 @@
     "skipLibCheck": true, // Skips type-checking .d.ts files (faster builds)
     "moduleResolution": "node", // How TS finds modules (node_modules lookup)
     "resolveJsonModule": true, // Allows importing .json files
-    "forceConsistentCasingInFileNames": true // Prevents case-sensitivity bugs
+    "forceConsistentCasingInFileNames": true, // Prevents case-sensitivity bugs
+     "ignoreDeprecations": "6.0"
   },
   "include": ["src/**/*.ts"], // Which files to compile
   "exclude": ["node_modules"] // Which files to ignore
