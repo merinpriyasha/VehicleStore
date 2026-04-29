@@ -25,11 +25,11 @@
     "pg": "^8.16.3",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
-    "@types/multer": "^2.1.0"
+    "@types/multer": "^2.1.0",
+    "drizzle-kit": "^0.31.7"
   },
   "devDependencies": {
     "@types/pg": "^8.15.6",
-    "drizzle-kit": "^0.31.7",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
